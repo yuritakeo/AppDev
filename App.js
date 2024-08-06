@@ -1,12 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.titulo}>Projeto Dev</Text>
+        <Ionicons name="shield-checkmark-sharp" size={32} color="green" />
       </View>
+
+
+      <View>
+        <Text>teste</Text>
+      </View>
+      
 
       <StatusBar style="auto" />
     </View>

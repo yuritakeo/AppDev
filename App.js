@@ -1,15 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Checkbox from 'expo-checkbox';
 import { Picker } from '@react-native-picker/picker';
 
+import logoOnibus from './assets/logoOnibus.png'
+
 const App = () => {
-  const [matricula, setMatricula] = useState('8929');
+  const [matricula, setMatricula] = useState('');
   const [isChecked, setChecked] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState('');
-  
+
   const pickerRef = useRef(null);
 
   const handleMatriculaChange = (text) => {
@@ -31,40 +33,75 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titulo}>Projeto Dev</Text>
-        <Ionicons style={styles.logo} name="shield-checkmark-sharp" size={32} color="green" />
+        <Text style={styles.titulo}>$NOME_EMPRESA</Text>
       </View>
 
       <View style={styles.formulario}>
+
+
+        <Image
+          source={require('./assets/logoOnibus.png')}
+        />
+
+        <Text style={styles.titulo}>Login</Text>
+
+
+
         <View style={styles.formularioCampo}>
-          <Text>Matriculaa</Text>
           <TextInput
             style={styles.input}
-            placeholder="Digite sua matricula"
+            placeholder="Login"
             onChangeText={handleMatriculaChange}
             value={matricula}
             keyboardType="numeric"
           />
+          <Image
+            style={styles.inputIcon}
+            source={require('./assets/logoUser.png')}
+          />
         </View>
 
         <View style={styles.formularioCampo}>
-          <Text>Empresa</Text>
-          <Picker
-            ref={pickerRef}
-            selectedValue={selectedEmpresa}
-            onValueChange={handlePickerChange}
-          >
-            <Picker.Item label="Selecione" value="" />
-            <Picker.Item label="Praia Sol" value="praia-sol" />
-            <Picker.Item label="Vereda" value="vereda" />
-            <Picker.Item label="Serramar" value="serramar" />
-          </Picker>
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            onChangeText={handleMatriculaChange}
+            value={matricula}
+          />
+          <Image
+            style={styles.inputIcon}
+            source={require('./assets/logoUser.png')}
+          />
         </View>
+
+
+        <View style={styles.formularioCampoEmpresa}>
+          <TextInput
+            style={styles.input}
+            placeholder="Empresa"
+            onChangeText={handleMatriculaChange}
+            value={matricula}
+          />
+          <View style={styles.inputEmpresa}>
+            <Picker
+              style={styles.inputEmpresaPicker}
+              ref={pickerRef}
+              selectedValue={selectedEmpresa}
+              onValueChange={handlePickerChange}
+            >
+              <Picker.Item label="Empresa" value="" />
+              <Picker.Item label="Praia Sol" value="praia-sol" />
+              <Picker.Item label="Vereda" value="vereda" />
+              <Picker.Item label="Serramar" value="serramar" />
+            </Picker>
+          </View>
+        </View>
+
 
         <View style={styles.formularioCampo}>
           <View style={styles.salvarDados}>
             <Checkbox
-              style={styles.checkbox}
+              style={[styles.checkbox]}
               value={isChecked}
               onValueChange={setChecked}
             />
@@ -72,76 +109,127 @@ const App = () => {
           </View>
         </View>
 
-        <View style={styles.formularioCampo}>
-          <View style={styles.formularioCampoBotaoAcessar}>
-            <Button title='ACESSAR' />
-          </View>
-        </View>
+
+        {/* <View style={styles.btnAcessar}>
+          <Button
+            color='#fff'
+            title='ACESSAR'
+            onPress={() => alert('Teste botao')} />
+        </View> */}
+
+
+
+        <Button title='Teste' buttonStyle={styles.btnstylehere} >
+          
+        </Button>
+
+
+
       </View>
 
+
+
+
       <StatusBar style="auto" />
-    </View>
+    </View >
   );
 };
 
 const styles = StyleSheet.create({
-//------------APP------------//
+  //------------APP------------//
   container: {
     flex: 1,
     width: '100%',//TODO: TESTAR AS DIMENSÕES/ALINHAMENTOS
-    backgroundColor: '#505050',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
-//------------APP------------//
+  //------------APP------------//
 
-//------------HEADER------------//
+  //------------HEADER------------//
   header: {
-    backgroundColor: '#050505',
+    backgroundColor: '#075AA9',
     height: '15%',
     width: '100%',
     alignItems: 'center',//AJUSTA O TAMANHO
     justifyContent: 'center',
   },
   titulo: {
-    color: '#f0f',
+    color: '#fff',
     fontSize: 40,
   },
-  logo: {
-    backgroundColor: 'red',
-  },
-//------------HEADER------------//
+  //------------HEADER------------//
 
-//------------FORMULARIO------------//
+  //------------FORMULARIO------------//
   formulario: {
-    width: '100%',
-    backgroundColor: '#ff0',
+    top: '5%',
+    width: '80%',
+    backgroundColor: '#075AA9',
     padding: 20,
+    alignItems: 'center',
+    borderRadius: 8,
+    // borderWidth: 3,
+
   },
   formularioCampo: {
-    borderRadius: 8,
+    borderStyle: 'solid',
+    borderColor: '#000',
     backgroundColor: '#fff',
-    padding: 10,
     marginBottom: 10,
+    width: '90%',
+    display: 'flex',
+    flexDirection: 'row'
   },
+  campo: {},
   input: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
+    width: '100%',
+    height: 50,
+    textAlign: 'left',
     borderRadius: 4,
     paddingHorizontal: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#fff',
   },
-  //------------FORMULARIO_CAMPO_BOTAO_ACESSAR------------//
+  inputIcon: {
+    left: -40,
+    top: 15
+  },
+  inputEmpresa: {
+    color: '#fff',
+  },
+  formularioCampoEmpresa: {
+    width: '90%'
+  },
+  inputEmpresaPicker: {
+    color: '#fff'
+  },
+
+  //------------FORMULARIO_CAMPO_MANTER_ME_CONECTADO------------//
   salvarDados: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  //------------FORMULARIO_CAMPO_BOTAO_ACESSAR------------//
   checkbox: {
     marginRight: 10,
+  },
+  //------------FORMULARIO_CAMPO_MANTER_ME_CONECTADO------------//
+
+
+  //------------FORMULARIO_CAMPO_BOTAO_ACESSAR------------//
+  btnAcessar: {
+    color: '#000',
+    width: '90%'
+  },
+  btnAcessarObj: {
+    color: '#000'
+  },
+  teste: {
+    color: '#000'
   }
-//------------FORMULARIO------------//
-  
+
+  //------------FORMULARIO_CAMPO_BOTAO_ACESSAR------------//
+
+  //------------FORMULARIO------------//
+
 });
 
 export default App;
